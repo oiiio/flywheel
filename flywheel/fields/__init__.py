@@ -43,6 +43,7 @@ class Field(object):
     default : object, optional
         The default value for this field that will be set when creating a model
         (default None, except for ``set`` data types which default to set())
+    metadata : Extra arguments to be stored as metadata.
 
     Attributes
     ----------
@@ -67,7 +68,7 @@ class Field(object):
 
     def __init__(self, hash_key=False, range_key=False, index=None,
                  data_type=NO_ARG, type=six.text_type, coerce=False,
-                 check=None, nullable=True, default=NO_ARG):
+                 check=None, nullable=True, default=NO_ARG, **metadata):
         if hash_key and range_key:
             raise ValueError("hash_key and range_key are mutually exclusive!")
         self.name = None
@@ -110,6 +111,7 @@ class Field(object):
             self._default = default
         if index:
             self.all_index(index)
+        self.metadata = metadata
 
     @property
     def default(self):
