@@ -116,6 +116,8 @@ class Field(object):
     @property
     def default(self):
         """ Get a shallow copy of the default value """
+        if hasattr(self._default, '__call__'):
+            return self._default()
         return copy.copy(self._default)
 
     def get_ddb_index(self):
