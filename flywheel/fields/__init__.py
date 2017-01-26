@@ -93,7 +93,8 @@ class Field(object):
                 self.check = list(check)
             else:
                 self.check = [check]
-        if not nullable:
+        self.nullable = nullable
+        if not self.nullable:
             self.check.append(lambda x: not is_null(x))
         self.hash_key = hash_key
         self.range_key = range_key
